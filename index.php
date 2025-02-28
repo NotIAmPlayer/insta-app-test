@@ -1,3 +1,21 @@
+<?php
+    require "conn.php";
+
+    $msg = "";
+
+    if (isset($_POST['submit'])) {
+        $email = $_POST['email'];
+        $password = md5($_POST['password']);
+
+        $query = $conn->query("SELECT UserEmail, UserPassword FROM Users WHERE UserEmail = '$email' AND UserPassword = '$password'");
+        
+        if ($query->fetch_assoc()) {
+            $msg = "Success";
+        } else {
+            $msg = "Email or password is incorrect";
+        }
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,6 +61,11 @@
                         Login
                     </button>
                 </form>
+                <?php if ($msg != "") {
+                    ?>
+                    <p class="text-red-500 text-center"><?= $msg ?></p>
+                    <?php
+                }?>
             </div>
             <div class="mx-4 mb-4 w-full lg:w-3/4 2xl:w-1/2 bg-slate-200 px-2 py-4 rounded-2xl">
                 <p class="text-center">Don't have an account? <a href="sign_up.php" class="font-bold text-blue-600 hover:text-blue-500 select-none">Sign up</a></p>
@@ -51,8 +74,6 @@
     </div>
 </body>
 <script>
-    console.log(`<?php var_dump($_POST); ?>`);
-
     const toggleShowPassword = () => {
         let pass = document.forms["login_form"]["password"];
         let show = document.forms["login_form"]["show_pass"];
