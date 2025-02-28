@@ -1,4 +1,3 @@
-<?php var_dump($_POST); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +13,7 @@
                 <h1 class="font-serif text-3xl mb-4 text-center select-none">InstaApp</h1>
                 <form method="post" class="my-2 w-7/10 mx-auto" name="login_form">
                     <input
-                        type="text"
+                        type="email"
                         class="w-full px-2 py-1 border border-slate-500 rounded-xl focus:outline-none hover:outline-none
                         focus:border-blue-600 hover:border-blue-600 mb-2 bg-white"
                         name="email"
@@ -46,12 +45,14 @@
                 </form>
             </div>
             <div class="mx-4 mb-4 w-full lg:w-3/4 2xl:w-1/2 bg-slate-200 px-2 py-4 rounded-2xl">
-                <p class="text-center">Don't have an account? <a href="#" class="font-bold text-blue-600 hover:text-blue-500 select-none">Sign up</a></p>
+                <p class="text-center">Don't have an account? <a href="sign_up.php" class="font-bold text-blue-600 hover:text-blue-500 select-none">Sign up</a></p>
             </div>
         </div>
     </div>
 </body>
 <script>
+    console.log(`<?php var_dump($_POST); ?>`);
+
     const toggleShowPassword = () => {
         let pass = document.forms["login_form"]["password"];
         let show = document.forms["login_form"]["show_pass"];
